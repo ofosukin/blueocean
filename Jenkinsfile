@@ -10,6 +10,30 @@ pipeline {
                  '''
              }
          }
+         stage('Deliver for development') {
+            when {
+                branch 'development' 
+            }
+            steps {
+                sh 'echo "Hello World, my comment"'
+                sh '''
+                     echo "Multiline shell steps works too"
+                     ls -lah
+                 '''
+            }
+        }
+        stage('Deploy for production') {
+            when {
+                branch 'production'  
+            }
+            steps {
+                sh 'echo "Hello World, my comment"'
+                sh '''
+                     echo "Multiline shell steps works too"
+                     ls -lah
+                 '''
+            }
+        }
          stage('Lint HTML') {
               steps {
                   sh 'tidy -q -e *.html'
